@@ -21,7 +21,7 @@ def compile_channels(path, user_data, channel_data):
         if not day_files:
             continue
         for day in sorted(day_files):
-            with open(os.path.join(path, day)) as f:
+            with open(os.path.join(path, day), encoding="utf-8") as f:
                 day_messages = json.load(f)
                 messages.extend([Message(user_data, channel_data, d) for d in
                                  day_messages])
@@ -30,12 +30,12 @@ def compile_channels(path, user_data, channel_data):
 
 
 def get_users(path):
-    with open(os.path.join(path, "users.json")) as f:
+    with open(os.path.join(path, "users.json"), encoding="utf-8") as f:
         return {u["id"]: u for u in json.load(f)}
 
 
 def get_channels(path):
-    with open(os.path.join(path, "channels.json")) as f:
+    with open(os.path.join(path, "channels.json"), encoding="utf-8") as f:
         return {u["id"]: u for u in json.load(f)}
 
 
