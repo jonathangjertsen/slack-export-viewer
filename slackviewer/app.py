@@ -1,5 +1,9 @@
-import flask
+import os
+import json
+import sys
 
+import flask
+from flask_basicauth import BasicAuth
 
 app = flask.Flask(
     __name__,
@@ -7,6 +11,15 @@ app = flask.Flask(
     static_folder="static"
 )
 
+try:
+    with open(os.path.join(os.path.dirname(__file__), "../secrets.json")) as f:
+        secrets = json.load(f)
+        app.config['BASIC_AUTH_USERNAME'] = secrets["username"]
+        app.config['BASIC_AUTH_PASSWORD'] = secrets["password"]
+        app.config['BASIC_AUTH_FORCE'] = True
+        basic_auth = BasicAuth(app)
+except FileNotFoundError:
+    print("No secrets.json file found, no auth will be used.")
 
 @app.route("/channel/<name>")
 def channel_name(name):
