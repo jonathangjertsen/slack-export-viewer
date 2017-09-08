@@ -1,3 +1,10 @@
+# Fork w/ utf-8 encoding and basic auth
+
+This fork includes two changes:
+
+* `encoding="utf-8"` is used to prevent UnicodeDecodeErrors
+* Basic authentication
+
 # Slack Export Viewer
 
 A Slack Export archive viewer that allows you to easily view and share your 
